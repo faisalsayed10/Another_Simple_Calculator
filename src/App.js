@@ -6,9 +6,33 @@ import EqualButton from "./components/EqualButton";
 import * as math from "mathjs";
 
 const operatorsArr = ["*", "/", "+", ".", "-"];
+const numArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+const keysArr = [...operatorsArr, ...numArr];
 
 export default function App() {
   const [input, setInput] = useState("");
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      // console.log(e.key)
+      if (operatorsArr.includes(input[input.length - 1]) && !numArr.includes(parseInt(e.key))) {
+        return input;
+      } 
+      else if (keysArr.includes(e.key) || keysArr.includes(parseInt(e.key))) {
+        setInput((prevInput) => prevInput + e.key);
+      }
+      else if (e.key === "=" || e.key === "Enter") {
+        evaluate()
+      }
+      else if (e.key === "c") {
+        setInput('')
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [input]);
 
   function inputNum(val) {
     setInput(input + val);
