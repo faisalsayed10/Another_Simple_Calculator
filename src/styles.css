@@ -49,3 +49,16 @@ h1 {
 h6 {
   font-size: 12px;
 }
+
+@media (max-width: 600px) {
+  .calc-wrapper {
+    width: 450px;
+  }
+}
+
+@media (max-width: 500px) {
+  .calc-wrapper {
+    width: 300px;
+    
+  }
+}
